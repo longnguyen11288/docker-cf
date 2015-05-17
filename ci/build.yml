@@ -1,0 +1,15 @@
+---
+platform: linux
+
+image: docker:///ubuntu#14.04
+
+inputs:
+- name: docker-cf
+  path: .
+- name: cf-cli-release
+
+params:
+  cf_cli_version_path: cf-cli-release/version
+
+run:
+  path: ci/build.sh

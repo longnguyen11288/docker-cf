@@ -1,0 +1,38 @@
+
+jobs:
+- name: job-docker-cf
+  public: true
+  serial: true
+  plan:
+  - aggregate:
+    - get: docker-cf
+      resource: git-docker-cf
+      trigger: true
+    - get: cf-cli-release
+      resource: cf-cli-github-release
+      trigger: true
+  - task: get-cf-cli
+    file: docker-cf/ci/build.yml
+  - task: ls
+    config:
+      platform: linux
+      image: docker:///ubuntu#14.04
+      inputs:
+      - name: github-release-spiff
+      run:
+        path: ls
+        args: ["-opR", "."]
+
+resources:
+- name: cf-cli-github-release
+  type: github-release
+  source:
+    user: cloudfoundry
+    repository: cli
+    access_token: {{github-access-token}}
+
+- name: git-docker-cf
+  type: git
+  source:
+    uri: https://github.com/starkandwayne/docker-cf.git
+    access_token: {{github-access-token}}
