@@ -2,4 +2,4 @@
 
 Docker image with cf cli used with concourse
 
-On docker hub as lnguyen/cf
+On docker hub as starkandwayne/cf

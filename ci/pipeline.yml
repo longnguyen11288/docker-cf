@@ -13,15 +13,12 @@ jobs:
       trigger: true
   - task: get-cf-cli
     file: docker-cf/ci/build.yml
-  - task: ls
-    config:
-      platform: linux
-      image: docker:///ubuntu#14.04
-      inputs:
-      - name: github-release-spiff
-      run:
-        path: ls
-        args: ["-opR", "."]
+  - put: docker-cf-image
+    params:
+      build: get-cf-cli
+      tag: cf-cli-release/version
+
+
 
 resources:
 - name: cf-cli-github-release
@@ -36,3 +33,11 @@ resources:
   source:
     uri: https://github.com/starkandwayne/docker-cf.git
     access_token: {{github-access-token}}
+
+- name: docker-cf-image
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: starkandwayne/cf
