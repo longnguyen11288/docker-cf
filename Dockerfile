@@ -1,3 +1,3 @@
 FROM progrium/busybox
 
-ADD get-cf-cli/bin/cf /usr/bin/cf
+ADD bin/cf /usr/bin/cf
