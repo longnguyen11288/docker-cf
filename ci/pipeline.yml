@@ -17,8 +17,7 @@ jobs:
     params:
       build: get-cf-cli
       tag: cf-cli-release/version
-
-
+      tag_prefix: v
 
 resources:
 - name: cf-cli-github-release
