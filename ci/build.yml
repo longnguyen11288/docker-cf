@@ -1,7 +1,7 @@
 ---
 platform: linux
 
-image: docker:///ubuntu#14.04
+image: image: docker:///ruby#2.1
 
 inputs:
 - name: docker-cf
